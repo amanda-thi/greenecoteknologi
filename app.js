@@ -1190,10 +1190,10 @@
               "WhatsApp으로 보내기",
             ],
             "Lihat Street View": ["View Street View", "스트리트 뷰 보기"],
-            "Diliput Media": ["In the News", "언론 보도"],
+            "Berita": ["News", "뉴스"],
             "Pemberitaan tentang PT Green Eco Teknologi.": ["News coverage of PT Green Eco Teknologi.", "PT Green Eco Teknologi 관련 보도"],
             "Baca berita →": ["Read the article →", "기사 읽기 →"],
-            "29 Oktober 2026": ["29 October 2026", "2026년 10월 29일"],
+            "30 Juli 2025": ["30 July 2025", "2025년 7월 30일"],
             "Buka di Google Maps": [
               "Open in Google Maps",
               "구글 지도에서 열기",
