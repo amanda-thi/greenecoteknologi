@@ -1189,6 +1189,7 @@
               "Send via WhatsApp",
               "WhatsApp으로 보내기",
             ],
+            "Lihat Street View": ["View Street View", "스트리트 뷰 보기"],
             "Buka di Google Maps": [
               "Open in Google Maps",
               "구글 지도에서 열기",
