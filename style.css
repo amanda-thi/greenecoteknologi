@@ -5074,18 +5074,18 @@
           .mapbtns { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 16px; }
           @media (max-width: 640px) { .map.sv { height: 300px; } }
           .news-list { border: 1px solid var(--line); border-radius: 14px; overflow: hidden; background: var(--card); margin-top: 20px; }
-          .ni { display: grid; grid-template-columns: 96px 1fr; gap: 14px; align-items: start; padding: 16px 18px; color: var(--ink); text-decoration: none; transition: background 0.2s; }
+          .ni { display: grid; grid-template-columns: 76px 1fr; gap: 12px; align-items: start; padding: 12px 14px; color: var(--ink); text-decoration: none; transition: background 0.2s; }
           .ni + .ni { border-top: 1px solid var(--line); }
           .ni:hover { background: var(--mint); }
-          .ni-img { width: 96px; height: 70px; object-fit: cover; object-position: 50% 20%; border-radius: 10px; display: block; }
+          .ni-img { width: 76px; height: 56px; object-fit: cover; object-position: 50% 20%; border-radius: 10px; display: block; }
           .ni-body { min-width: 0; }
-          .ni-meta { display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: 0.74rem; font-weight: 600; }
+          .ni-meta { display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: 0.68rem; font-weight: 600; }
           .ni-src { color: var(--green); }
-          .ni-body h3 { font-size: 0.92rem; line-height: 1.4; margin: 5px 0 5px; }
+          .ni-body h3 { font-size: 0.82rem; line-height: 1.35; margin: 4px 0 4px; }
           .ni:hover h3 { color: var(--green); }
-          .ni-url { display: block; font-size: 0.7rem; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-          @media (max-width: 520px) { .ni { grid-template-columns: 80px 1fr; gap: 12px; padding: 14px; } .ni-img { width: 80px; height: 60px; } }
-          .sk-grid { display: grid; grid-template-columns: minmax(0, 1.65fr) minmax(0, 1fr); gap: 44px; align-items: start; }
+          .ni-url { display: block; font-size: 0.64rem; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+          @media (max-width: 520px) { .ni { grid-template-columns: 72px 1fr; gap: 12px; padding: 12px; } .ni-img { width: 72px; height: 54px; } }
+          .sk-grid { display: grid; grid-template-columns: minmax(0, 1.8fr) minmax(0, 1fr); gap: 44px; align-items: start; }
           .sk-left .split { grid-template-columns: 1fr; gap: 16px; }
           .sk-left .bento { grid-template-columns: 1fr 1fr; grid-auto-rows: minmax(150px, auto); height: auto; gap: 16px; margin-top: 28px; }
           .sk-left .bento .tile { padding: 22px 26px; justify-content: flex-start; }
@@ -5093,4 +5093,15 @@
           .sk-left .bento .tile p { font-size: 0.95rem; margin-top: 8px; line-height: 1.45; }
           .sk-left .bento .tile.span2 p { font-size: 1rem !important; }
           .sk-left .tile.span2 { grid-column: span 2; grid-row: auto; }
+          @media (min-width: 961px) {
+            section:has(> .wrap > .sk-grid) { padding: clamp(18px, 3.6vh, 44px) 0 !important; min-height: calc(100vh - 72px); min-height: calc(100svh - 72px); box-sizing: border-box; display: flex; align-items: center; }
+            section:has(> .wrap > .sk-grid) > .wrap { width: 100%; }
+            .sk-grid h2 { font-size: clamp(1.5rem, min(3vw, 5vh), 2.5rem); }
+            .sk-grid .lede { font-size: clamp(0.84rem, 2vh, 1rem) !important; line-height: 1.5; margin-top: clamp(6px, 1.4vh, 14px) !important; }
+            .sk-left .bento { grid-template-columns: 1fr 1fr; grid-auto-rows: minmax(0, 1fr); height: clamp(220px, calc(100svh - 72px - 27vh - 24px), 440px); gap: clamp(10px, 2vh, 16px); margin-top: clamp(12px, 2.6vh, 26px); }
+            .sk-left .bento .tile { grid-column: auto !important; grid-row: auto !important; padding: clamp(12px, 2.4vh, 24px) clamp(16px, 1.8vw, 26px); justify-content: center; overflow: hidden; }
+            .sk-left .bento .tile .n { font-size: clamp(1.9rem, min(3.6vw, 7vh), 3.4rem); }
+            .sk-left .bento .tile p, .sk-left .bento .tile.span2 p { font-size: clamp(0.8rem, 1.9vh, 0.95rem) !important; margin-top: clamp(4px, 1vh, 8px); line-height: 1.4; }
+            .sk-right .news-list { margin-top: clamp(12px, 2.6vh, 26px); }
+          }
           @media (max-width: 960px) { .sk-grid { grid-template-columns: 1fr; gap: 44px; } }
