@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.domainanda.com/sitemap.xml
+Sitemap: https://greenecoteknologi.com/sitemap.xml
