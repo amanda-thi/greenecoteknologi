@@ -5076,6 +5076,7 @@
           .news-list { border: 1px solid var(--line); border-radius: 14px; overflow: hidden; background: var(--card); margin-top: 20px; }
           .ni { display: grid; grid-template-columns: 76px 1fr; gap: 12px; align-items: start; padding: 12px 14px; color: var(--ink); text-decoration: none; transition: background 0.2s; }
           .ni + .ni { border-top: 1px solid var(--line); }
+          .ni.no-img { grid-template-columns: 1fr; }
           .ni:hover { background: var(--mint); }
           .ni-img { width: 76px; height: 56px; object-fit: cover; object-position: 50% 20%; border-radius: 10px; display: block; }
           .ni-body { min-width: 0; }
