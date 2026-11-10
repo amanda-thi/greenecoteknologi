@@ -18,8 +18,10 @@
             fasil: PFX + "img/fasil.jpg",
             line: PFX + "img/line.jpg",
             pipa: PFX + "img/pipa.jpg",
+            larva: PFX + "img/larva.jpg",
+            pupuk: PFX + "img/pupuk.jpg",
           };
-          const POS = { dtop: "50% 50%", atop: "60% 50%", pipa: "50% 60%" };
+          const POS = { dtop: "50% 50%", atop: "60% 50%", pipa: "50% 60%", pupuk: "25% 60%" };
           const BLOB = {};
           const toBlobUrl = (u) => {
             try {
@@ -84,6 +86,8 @@
             link: '<path d="M10 14a4 4 0 005.7 0l3-3a4 4 0 00-5.7-5.7l-1 1M14 10a4 4 0 00-5.7 0l-3 3a4 4 0 005.7 5.7l1-1"/>',
           };
 
+          const WA = "6287846916104";
+
           /* nav */
           $("#burger").onclick = (e) => {
             const o = $("#nav").classList.toggle("open");
@@ -104,47 +108,79 @@
             o3: '<svg class="hh-s" viewBox="0 0 160 110" aria-hidden="true" focusable="false">\n<path class="a f1" d="M26 56H134Q132 92 80 92Q28 92 26 56z"/><g transform="translate(46 46) rotate(-6)"><rect class="a f2" width="22" height="9" rx="4.5"/><path class="s" d="M7 1V8M12 1V8M17 1V8"/></g><g transform="translate(74 42) rotate(4)"><rect class="a f2" width="22" height="9" rx="4.5"/><path class="s" d="M7 1V8M12 1V8M17 1V8"/></g><g transform="translate(96 47) rotate(-8)"><rect class="a f2" width="22" height="9" rx="4.5"/><path class="s" d="M7 1V8M12 1V8M17 1V8"/></g><g transform="translate(60 34) rotate(8)"><rect class="a f2" width="22" height="9" rx="4.5"/><path class="s" d="M7 1V8M12 1V8M17 1V8"/></g>\n<ellipse class="a f4" cx="124" cy="24" rx="14" ry="8"/><path class="a f4" d="M138 24l10-7v14z"/><circle class="a f1" cx="115" cy="22" r="2"/></svg>',
             o4: '<svg class="hh-s" viewBox="0 0 160 110" aria-hidden="true" focusable="false"><path class="s" d="M8 96H152"/>\n<rect class="a f3" x="8" y="76" width="144" height="20" rx="3"/><path class="s" d="M8 86H152"/>\n<path class="a f2" d="M36 76V54M36 62c-10 0-14-6-14-12 10 0 14 6 14 12zM36 58c8 0 12-6 12-12-9 0-12 6-12 12z"/>\n<path class="a f2" d="M80 76V44M80 56c-12 0-17-7-17-14 12 0 17 7 17 14zM80 50c10 0 15-8 15-16-11 0-15 8-15 16z"/>\n<path class="a f2" d="M124 76V56M124 64c-10 0-13-6-13-12 9 0 13 6 13 12zM124 60c8 0 11-6 11-11-8 0-11 5-11 11z"/></svg>',
           };
+          /* Data produk. Semua isi berasal dari konten website dan dokumen yang ada.
+             `spec` sengaja kosong: spesifikasi teknis (kalori, kadar air, ukuran, dimensi,
+             kandungan) BELUM dikonfirmasi perusahaan. Isi array ini bila datanya tersedia,
+             contoh: spec: [["Nilai kalor", "..."]]. Baris spesifikasi tampil otomatis. */
           const PROD = [
             {
-              t: "SRF",
+              id: "srf",
+              t: "SRF (Solid Recovered Fuel)",
               n: "SRF",
               d: "SRF (Solid Recovered Fuel), di Indonesia disebut BBJP. Bahan bakar alternatif untuk pabrik semen dan co-firing di PLTU Suralaya.",
               k: "k1",
               tag: "Bahan bakar alternatif",
               pk: "SRF",
+              rows: [
+                ["Bahan baku", "Sampah rumah tangga Kota Cilegon yang dapat dibakar, setelah dipisahkan dari sampah organik dan plastik yang bisa didaur ulang."],
+                ["Proses", "Digiling sampai ukuran seragam kurang dari 100 mm, dipilah tahap kedua untuk membuang sisa bahan organik dan kadar air, lalu dikeringkan sampai kadar air sesuai spesifikasi."],
+                ["Manfaat", "Pengganti batu bara sebagai bahan bakar alternatif untuk pabrik semen dan co-firing di PLTU Suralaya. Pengeringan menurunkan kadar air dan menaikkan nilai kalor."],
+              ],
+              spec: [],
             },
             {
+              id: "pipa",
               t: "Pipa dan Manhole Komposit Plastik",
               n: "Pipa Komposit",
               d: "Pipa saluran air limbah dan manhole dari plastik bekas.",
               k: "k2",
               tag: "Daur ulang plastik",
               pk: "pipa",
+              rows: [
+                ["Material", "Plastik bekas yang masih bisa didaur ulang, dikumpulkan dan dipilah dari sampah rumah tangga."],
+                ["Proses", "Plastik dikumpulkan di ban berjalan, dipilah oleh tenaga kerja, lalu diolah menjadi pipa dan manhole komposit."],
+                ["Kegunaan", "Pipa saluran air limbah dan manhole untuk infrastruktur."],
+              ],
+              spec: [],
             },
             {
+              id: "bsf",
               t: "Larva BSF",
               n: "Larva BSF",
               d: "Bahan baku pakan ikan dan unggas.",
               k: "k3",
               tag: "Budidaya BSF",
-              art: "o3",
+              pk: "larva",
+              rows: [
+                ["Budidaya", "Black Soldier Fly (BSF) dibudidayakan dengan memanfaatkan sampah organik sebagai pakan larva."],
+                ["Sampah organik", "Sisa makanan dan sayuran diolah sampai ukuran sesuai, diberi bioaktivator EM (Effective Microorganisms), lalu kadar airnya diatur agar cocok untuk pakan larva."],
+                ["Hasil dan manfaat", "Larva menjadi bahan baku pakan ikan dan unggas, sesuai standar keamanan dan mutu pakan. Residu budidaya (frass) dimanfaatkan menjadi pupuk organik."],
+              ],
+              spec: [],
             },
             {
+              id: "pupuk",
               t: "Pupuk Organik",
               n: "Pupuk Organik",
               d: "Dari frass, dipasok ke petani.",
               k: "k4",
               tag: "Dari frass BSF",
-              art: "o4",
+              pk: "pupuk",
+              rows: [
+                ["Bahan baku", "Frass, yaitu residu budidaya larva BSF."],
+                ["Proses", "Frass dimatangkan dan dikeringkan."],
+                ["Manfaat", "Dipasok ke petani sebagai pupuk organik yang memanfaatkan kembali sampah organik."],
+              ],
+              spec: [],
             },
           ];
           $("#track").innerHTML = PROD.map(
             (p) =>
-              `<a class="pcard ${p.k}" href="${PFX}produk/"><h3>${p.n}</h3><p>${p.d}</p><u>Selengkapnya →</u></a>`,
+              `<a class="pcard ${p.k}" href="${PFX}produk/#${p.id}"><div class="pthumb">${p.art ? HHART[p.art] : ph(p.pk, "Foto " + p.t)}</div><h3>${p.n}</h3><p>${p.d}</p><u>Detail Produk →</u></a>`,
           ).join("");
           $("#prodZ").innerHTML = PROD.map(
             (p) =>
-              `<div class="zz rv">${p.art ? `<div class="frame hh-fr">${HHART[p.art]}</div>` : `<div class="frame">${ph(p.pk, "Foto " + p.t)}</div>`}<div><span class="tag">${p.tag}</span><h3>${p.t}</h3><p>${p.d}</p></div></div>`,
+              `<div class="zz rv" id="${p.id}">${p.art ? `<div class="frame hh-fr">${HHART[p.art]}</div>` : `<div class="frame">${ph(p.pk, "Foto " + p.t)}</div>`}<div><span class="tag">${p.tag}</span><h3>${p.t}</h3><p>${p.d}</p><dl class="pdl">${p.rows.map((r) => `<div><dt>${r[0]}</dt><dd>${r[1]}</dd></div>`).join("")}${p.spec.map((r) => `<div><dt>${r[0]}</dt><dd>${r[1]}</dd></div>`).join("")}</dl><a class="btn line" href="https://wa.me/${WA}" data-wa="${p.t}">Tanya Produk Ini</a></div></div>`,
           ).join("");
           $("#prev").onclick = () =>
             $("#track").scrollBy({ left: -332, behavior: "smooth" });
@@ -608,6 +644,113 @@
           });
           sel(0);
 
+          /* ===== Alur Sampah Rumah Tangga Cilegon: komponen yang sama dengan alur TPSA ===== */
+          (function () {
+            const root = document.getElementById("cfd"),
+              src = document.querySelector(".cf-src");
+            if (!root || !src) return;
+            const clean = (e) => (e ? e.textContent.replace(/\s+/g, " ").trim() : "");
+            const prod = {};
+            document.querySelectorAll(".cf-outsec .hh-o").forEach((o) => {
+              const m = clean(o.querySelector(".hh-b")).match(/(\d+)/);
+              if (m) prod[+m[1]] = clean(o.querySelector("h4"));
+            });
+            const lanes = [
+              { k: "awal", short: "Tahap awal", name: "Tahap awal", box: src.querySelector(".hh-stem") },
+              ...[...src.querySelectorAll(".hh-lane")].map((l, i) => ({
+                k: i ? "org" : "bakar",
+                short: i ? "Jalur organik" : "Jalur bakar",
+                name: clean(l.querySelector(".hh-lh h3")),
+                box: l.querySelector(".hh-col"),
+              })),
+            ];
+            const CS = [];
+            lanes.forEach((ln, li) =>
+              ln.box.querySelectorAll(".hh-c").forEach((c) => {
+                const sv = c.querySelector("svg");
+                CS.push({
+                  t: clean(c.querySelector("h4")),
+                  d: clean(c.querySelector(".hh-t p")),
+                  svg: sv ? sv.outerHTML : "",
+                  lane: li,
+                });
+              }),
+            );
+            if (CS.length < 2) return;
+            src.remove();
+            const N = CS.length;
+            const nx = (i) =>
+              i === 2
+                ? [CS[3].t, CS[6].t]
+                : i < N - 1 && CS[i + 1].lane === CS[i].lane
+                  ? [CS[i + 1].t]
+                  : [];
+            const ar = (d) =>
+              `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" aria-hidden="true"><path d="${d}"/></svg>`;
+            const pad = (n) => String(n).padStart(2, "0");
+            root.innerHTML =
+              `<div class="pfd-track" role="tablist" aria-label="Tahapan pengolahan sampah rumah tangga" style="--n:${N}"><div class="pfd-rail"><i class="pfd-belt"></i></div>` +
+              CS.map(
+                (p, i) =>
+                  `<button class="pfd-st" role="tab" id="cf-t${i}" aria-controls="cf-panel"><span class="n">${pad(i + 1)}</span><span class="l">${p.t}</span></button>`,
+              ).join("") +
+              lanes
+                .map(
+                  (l) =>
+                    `<div class="cf-lane cf-${l.k}" aria-hidden="true"><span>${l.short}</span></div>`,
+                )
+                .join("") +
+              `</div><div class="pfd-detail" id="cf-panel" role="tabpanel" aria-live="polite"></div>`;
+            const tr = root.querySelector(".pfd-track"),
+              pn = root.querySelector("#cf-panel"),
+              bt = [...tr.querySelectorAll(".pfd-st")];
+            let cur = 0;
+            function go(i, f, nav) {
+              i = Math.max(0, Math.min(N - 1, i));
+              const p = CS[i],
+                n = pad(i + 1);
+              cur = i;
+              tr.style.setProperty("--p", i / (N - 1));
+              bt.forEach((b, j) => {
+                b.setAttribute("aria-selected", j === i);
+                b.tabIndex = j === i ? 0 : -1;
+                b.classList.toggle("done", j < i);
+                if (f && j === i) b.focus();
+              });
+              const nxt = nx(i);
+              const last = prod[i + 1]
+                ? `<div><dt>Hasil</dt><dd>${prod[i + 1]}</dd></div>`
+                : nxt.length
+                  ? `<div><dt>Lanjut ke</dt><dd>${nxt.map((x) => `<span>${x}</span>`).join('<span class="cf-sep"> · </span>')}</dd></div>`
+                  : "";
+              pn.setAttribute("aria-labelledby", "cf-t" + i);
+              pn.innerHTML =
+                `<figure class="pfd-fig cf-fig"><div class="cf-art">${p.svg}</div><figcaption><span>Fig. ${n}</span><span>${p.t}</span></figcaption></figure>` +
+                `<div class="pfd-txt"><p class="pfd-k"><span>Stasiun</span> <b>${n}</b> / ${pad(N)}</p><h3>${p.t}</h3><p class="pfd-d">${p.d}</p>` +
+                `<dl class="pfd-io"><div><dt>Jalur</dt><dd>${lanes[p.lane].name}</dd></div>${last}</dl>` +
+                `<div class="pfd-nav"><button class="pfd-nb" data-d="-1" aria-label="Tahap sebelumnya"${i === 0 ? ' aria-disabled="true"' : ""}>${ar("M19 12H5M11 6l-6 6 6 6")}</button><button class="pfd-nb" data-d="1" aria-label="Tahap berikutnya"${i === N - 1 ? ' aria-disabled="true"' : ""}>${ar("M5 12h14M13 6l6 6-6 6")}</button></div></div>`;
+              if (nav) {
+                const t = pn.querySelector(`[data-d="${nav}"]`);
+                if (t && t.getAttribute("aria-disabled") !== "true") t.focus();
+              }
+            }
+            bt.forEach((b, i) => {
+              b.onclick = () => go(i);
+              b.onkeydown = (e) => {
+                if (/Arrow(Down|Right)/.test(e.key)) { e.preventDefault(); go((i + 1) % N, 1); }
+                if (/Arrow(Up|Left)/.test(e.key)) { e.preventDefault(); go((i + N - 1) % N, 1); }
+                if (e.key === "Home") { e.preventDefault(); go(0, 1); }
+                if (e.key === "End") { e.preventDefault(); go(N - 1, 1); }
+              };
+            });
+            pn.addEventListener("click", (e) => {
+              const b = e.target.closest(".pfd-nb");
+              if (!b || b.getAttribute("aria-disabled") === "true") return;
+              go(cur + +b.dataset.d, 0, b.dataset.d);
+            });
+            go(0);
+          })();
+
           /* cutter hotspots */
           const CT = {
             hook: [
@@ -657,26 +800,32 @@
           pick("hook");
 
           /* legal */
+          /* Nomor dokumen dibaca dari PDF sumber (Legalitas_PT_Green_Eco_Teknologi.pdf).
+             Paten: PDF sumber hanya memuat judul, tanpa nomor paten, jadi nomor tidak ditampilkan. */
           const DOCS = [
             [
               "Nomor Induk Berusaha (NIB)",
               "Terbit 8 Februari 2025, perubahan ke-1 pada 16 April 2025",
               "NIB",
+              "0602250114097",
             ],
             [
               "SK Menteri Hukum RI",
               "Persetujuan perubahan anggaran dasar, 16 April 2025",
               "SK",
+              "AHU-0024384.AH.01.02.TAHUN 2025",
             ],
             [
               "Pemberitahuan Perubahan Data Perseroan",
               "Ditjen Administrasi Hukum Umum, 16 April 2025",
               "AHU",
+              "AHU-AH.01.09-0189586",
             ],
             [
               "NPWP",
               "KPP Pratama Cikarang Selatan, terdaftar 5 Februari 2025",
               "DJP",
+              "1091 0312 1131 6735",
             ],
           ];
           const PAT = [
@@ -707,21 +856,22 @@
               b.setAttribute("aria-selected", b.dataset.k === k),
             );
             const d = $("#docs");
+            const pdf =
+              k === "pat"
+                ? PFX + "Sertifikasi_PT_Green_Eco_Teknologi.pdf"
+                : PFX + "Legalitas_PT_Green_Eco_Teknologi.pdf";
             d.className = "docs" + (k === "pat" ? " six" : "");
             d.innerHTML = (k === "doc" ? DOCS : PAT)
               .map(
                 (x) =>
-                  `<div class="doc"><h3>${x[0]}</h3><small>${x[1]}</small><div class="lines"><i></i><i></i><i></i></div><div class="seal">${k === "doc" ? x[2] : "KIPO"}</div></div>`,
+                  `<div class="doc"><h3>${x[0]}</h3><small>${x[1]}</small>${k === "doc" ? `<small class="dno"><span>Nomor</span> ${x[3]}</small>` : ""}<div class="lines"><i></i><i></i><i></i></div><a class="doclink" href="${pdf}" target="_blank" rel="noopener">Buka PDF</a><div class="seal">${k === "doc" ? x[2] : "KIPO"}</div></div>`,
               )
               .join("");
             $("#lnote").textContent =
               k === "pat"
                 ? "Paten terdaftar di Korean Intellectual Property Office."
                 : "Salinan dokumen asli dapat dibuka lewat tombol di bawah.";
-            $("#pdfbtn").href =
-              k === "pat"
-                ? PFX + "Sertifikasi_PT_Green_Eco_Teknologi.pdf"
-                : PFX + "Legalitas_PT_Green_Eco_Teknologi.pdf";
+            $("#pdfbtn").href = pdf;
             $("#pdfbtnt").textContent =
               k === "pat"
                 ? "Buka PDF Sertifikasi Asli"
@@ -733,7 +883,6 @@
           legal("doc");
 
           /* WhatsApp: nomor + template pesan (ikut bahasa aktif) */
-          const WA = "6287846916104";
           const waMsg = () =>
             LANG === "en"
               ? "Hello PT Green Eco Teknologi, I would like to ask about your products and services."
@@ -781,8 +930,16 @@
             const href = a.getAttribute("href") || "";
             if (href.indexOf("?text=") > -1) return;
             e.preventDefault();
+            const pr = a.dataset.wa;
+            const pm = pr
+              ? LANG === "en"
+                ? "Hello PT Green Eco Teknologi, I would like to ask about your product: " + pr + "."
+                : LANG === "ko"
+                  ? "안녕하세요, PT Green Eco Teknologi 담당자님. 제품 문의드립니다: " + pr + "."
+                  : "Halo PT Green Eco Teknologi, saya ingin menanyakan produk: " + pr + "."
+              : waMsg();
             window.open(
-              "https://wa.me/" + WA + "?text=" + encodeURIComponent(waMsg()),
+              "https://wa.me/" + WA + "?text=" + encodeURIComponent(pm),
               "_blank",
               "noopener",
             );
@@ -1219,10 +1376,10 @@
               "Our Scale and Capabilities",
               "당사의 규모와 역량",
             ],
-            "Proyek utama kami adalah revitalisasi TPSA Bagendung di Kota Cilegon, untuk menaikkan kapasitas olah dan kualitas bahan bakar SRF.":
+            "Mesin pengolahan sampah kami dirancang sendiri dan menjadi tulang punggung proyek utama kami, revitalisasi TPSA Bagendung di Kota Cilegon, untuk menaikkan kapasitas olah dan kualitas bahan bakar SRF.":
               [
-                "Our main project is the revitalization of the Bagendung landfill (TPSA) in Cilegon, to raise processing capacity and the quality of SRF fuel.",
-                "당사의 주요 프로젝트는 Cilegon시 Bagendung 매립장(TPSA) 재정비로, 처리 용량과 SRF 연료 품질을 높이는 것입니다.",
+                "Our waste processing machines are designed in-house and are the backbone of our main project, the revitalization of the Bagendung landfill (TPSA) in Cilegon, raising processing capacity and the quality of SRF fuel.",
+                "당사의 폐기물 처리 장비는 자체 설계되었으며, 주요 프로젝트인 Cilegon시 Bagendung 매립장(TPSA) 재정비의 핵심으로서 처리 용량과 SRF 연료 품질을 높입니다.",
               ],
             "ton sampah per hari: kapasitas olah TPSA Bagendung dari 30 ton, ditargetkan naik hingga 200 ton.":
               [
@@ -1545,9 +1702,9 @@
               "Founded to develop SRF- and BBJP-based waste processing.",
               "SRF 및 BBJP 기반 폐기물 처리를 개발하기 위해 설립되었습니다.",
             ],
-            "Kapasitas naik dari 30 ke 200 ton/hari.": [
-              "Capacity rises from 30 to 200 tons/day.",
-              "처리 용량이 하루 30톤에서 200톤으로 늘어납니다.",
+            "Kapasitas olah diperkirakan 200 ton/hari.": [
+              "Estimated processing capacity of 200 tons/day.",
+              "하루 예상 처리 용량 200톤.",
             ],
             "Kapasitas Pengolahan TPSA Bagendung": [
               "Processing Capacity of the Bagendung Landfill (TPSA)",
@@ -1576,13 +1733,13 @@
               "Improving BBJP/SRF quality.",
               "BBJP/SRF 품질을 높입니다.",
             ],
-            "Kapasitas Naik Hingga 200 Ton": [
-              "Capacity Up to 200 Tons",
-              "처리 용량 최대 200톤",
+            "Kapasitas Olah Hingga 200 Ton/Hari": [
+              "Processing Capacity Up to 200 Tons/Day",
+              "하루 처리 용량 최대 200톤",
             ],
-            "Dari 30 ton/hari menjadi 200 ton/hari.": [
-              "From 30 tons/day to 200 tons/day.",
-              "하루 30톤에서 200톤으로 확대합니다.",
+            "Perkiraan kapasitas olah sampah per hari setelah revitalisasi.": [
+              "Estimated waste processing capacity per day after revitalization.",
+              "재정비 후 하루 예상 폐기물 처리 용량입니다.",
             ],
             "Sistem Dryer": ["Dryer System", "건조 시스템"],
             "Menurunkan kadar air dan menaikkan nilai kalor SRF.": [
@@ -2188,6 +2345,12 @@
               "생산물: BSF 유충과 유기질 비료",
             ],
             "Empat Produk Akhir": ["Four End Products", "네 가지 최종 제품"],
+            "Tahap awal": ["Early stage", "초기 단계"],
+            "Jalur bakar": ["Combustible line", "가연성 라인"],
+            "Jalur organik": ["Organic line", "유기성 라인"],
+            "Jalur": ["Line", "라인"],
+            "Hasil": ["Output", "생산물"],
+            "Lanjut ke": ["Next", "다음 단계"],
             "Hasilnya, volume sampah berkurang dan sampah berubah menjadi produk bernilai ekonomi.":
               [
                 "The result: less waste volume, and waste turned into products with economic value.",
@@ -2338,9 +2501,9 @@
             "Daur ulang plastik": ["Plastic recycling", "플라스틱 재활용"],
             "Budidaya BSF": ["BSF rearing", "BSF 사육"],
             "Dari frass BSF": ["From BSF frass", "BSF 프라스 유래"],
-            "jenis produk: SRF, pipa komposit, larva BSF, dan pupuk organik": [
-              "product types: SRF, composite pipes, BSF larvae, and organic fertilizer",
-              "제품 종류: SRF, 복합관, BSF 유충, 유기질 비료",
+            "jenis produk yang dihasilkan mesin kami: SRF, pipa komposit, larva BSF, dan pupuk organik": [
+              "product types produced by our machines: SRF, composite pipes, BSF larvae, and organic fertilizer",
+              "기계가 만들어내는 제품 종류: SRF, 복합관, BSF 유충, 유기질 비료",
             ],
             "Teknologi Sendiri, Disesuaikan untuk Sampah Indonesia": [
               "Our Own Technology, Adapted for Indonesian Waste",
@@ -2378,10 +2541,10 @@
                 "The crusher was developed for Indonesian household waste and the way workers operate here. It is designed not to stop even when a large amount of waste is fed in at once, and was tested on site in Cilegon. The videos are below.",
                 "파쇄기는 인도네시아 생활폐기물과 현지 작업자의 작업 방식에 맞춰 개발했습니다. 한 번에 많은 폐기물이 투입되어도 멈추지 않도록 설계했으며, 칠레곤 현장에서 직접 시험했습니다. 영상은 아래에 있습니다.",
               ],
-            "paten teknologi penghancur dan pemilah, termasuk yang terdaftar di Korea Selatan":
+            "paten teknologi mesin penghancur dan pemilah, termasuk yang terdaftar di Korea Selatan":
               [
-                "patents on crushing and sorting technology, including ones registered in South Korea",
-                "파쇄·선별 기술 특허 (한국 등록 포함)",
+                "patents on crushing and sorting machine technology, including ones registered in South Korea",
+                "파쇄·선별 기계 기술 특허 (한국 등록 포함)",
               ],
             "proyek riset nasional pemerintah pusat Korea Selatan yang berhasil diselesaikan":
               [
@@ -2409,6 +2572,114 @@
                 "한 번에 많은 폐기물이 투입되어도 기계가 멈추지 않도록 설계했습니다.",
               ],
             "Lihat Alurnya": ["See the Process", "공정 보기"],
+          });
+
+          Object.assign(TR, {
+            "Solusi Teknologi Pengolahan Sampah Terpadu": ["Integrated Waste Processing Technology Solutions", "통합 폐기물 처리 기술 솔루션"],
+            "Mengubah limbah menjadi energi, material, dan produk bernilai melalui inovasi teknologi pengolahan sampah.": ["Turning waste into energy, materials, and valuable products through waste processing technology innovation.", "폐기물 처리 기술 혁신으로 폐기물을 에너지, 소재, 그리고 가치 있는 제품으로 전환합니다."],
+            "Lihat Produk": ["View Products", "제품 보기"],
+            "ton sampah per hari: perkiraan kapasitas olah lini mesin TPSA Bagendung setelah revitalisasi.": ["tons of waste per day: the estimated processing capacity of the machine line at the Bagendung landfill (TPSA) after revitalization.", "톤/일: 재정비 후 Bagendung 매립장(TPSA) 설비 라인의 예상 처리 용량입니다."],
+            "Baca selengkapnya →": ["Read more →", "자세히 읽기 →"],
+            "Proses Pengolahan Sampah dalam Tiga Tahap": ["Waste Processing in Three Stages", "폐기물 처리 3단계"],
+            "Ringkasan alur dari sampah yang masuk sampai menjadi produk bernilai. Detail teknis setiap tahap ada di bawah.": ["A summary of the flow from incoming waste to valuable products. Technical details for each stage are below.", "반입된 폐기물이 가치 있는 제품이 되기까지의 흐름을 요약했습니다. 각 단계의 기술적 세부 내용은 아래에 있습니다."],
+            "Pengumpulan dan Pemilahan": ["Collection and Sorting", "수거 및 선별"],
+            "Truk sampah ditimbang di jembatan timbang. Plastik yang masih bisa didaur ulang dikumpulkan, sisa sampah dicacah, lalu mesin memisahkan sampah organik dari sampah yang dapat dibakar.": ["Waste trucks are weighed at the weighbridge. Recyclable plastic is collected, the remaining waste is shredded, and machines then separate organic waste from combustible waste.", "폐기물 트럭은 계량대에서 무게를 잽니다. 재활용 가능한 플라스틱은 따로 모으고, 나머지 폐기물은 파쇄한 뒤 기계가 유기성 폐기물과 가연성 폐기물을 분리합니다."],
+            "Pengolahan Sampah Organik dan Anorganik": ["Organic and Inorganic Waste Processing", "유기성 및 무기성 폐기물 처리"],
+            "Sampah yang dapat dibakar digiling, dipilah ulang, dan dikeringkan. Sampah organik difermentasi dengan bioaktivator EM untuk menjadi pakan larva BSF.": ["Combustible waste is ground, sorted again, and dried. Organic waste is fermented with EM bio-activator to become feed for BSF larvae.", "가연성 폐기물은 분쇄, 재선별, 건조합니다. 유기성 폐기물은 EM 활성제로 발효시켜 BSF 유충의 먹이로 사용합니다."],
+            "Pemanfaatan Menjadi Produk Bernilai": ["Turning Results into Valuable Products", "가치 있는 제품으로의 활용"],
+            "Hasilnya berupa SRF sebagai bahan bakar alternatif, pipa dan manhole komposit plastik, larva BSF sebagai bahan baku pakan, dan pupuk organik dari frass.": ["The results are SRF as an alternative fuel, plastic composite pipes and manholes, BSF larvae as feed raw material, and organic fertilizer from frass.", "그 결과 대체 연료인 SRF, 플라스틱 복합 파이프와 맨홀, 사료 원료인 BSF 유충, 그리고 프라스(frass)로 만든 유기질 비료가 생산됩니다."],
+            "Lihat Proses Lengkap": ["View Full Process", "전체 공정 보기"],
+            "Detail Produk →": ["Product Details →", "제품 상세 →"],
+            "PT Green Eco Teknologi | Solusi Teknologi Pengolahan Sampah Terpadu": ["PT Green Eco Teknologi | Integrated Waste Processing Technology Solutions", "PT Green Eco Teknologi | 통합 폐기물 처리 기술 솔루션"],
+            "Solusi teknologi pengolahan sampah terpadu dari Cilegon: SRF, pipa komposit plastik, larva BSF, pupuk organik, serta mesin penghancur dan penyortir buatan sendiri.": ["Integrated waste processing technology solutions from Cilegon: SRF, plastic composite pipes, BSF larvae, organic fertilizer, and in-house designed crushing and sorting machines.", "칠레곤에서 제공하는 통합 폐기물 처리 기술 솔루션: SRF, 플라스틱 복합 파이프, BSF 유충, 유기질 비료, 자체 설계 파쇄·선별 장비."],
+            "Produk & Solusi: SRF, Pipa Komposit, Larva BSF, Pupuk Organik": ["Products & Solutions: SRF, Composite Pipes, BSF Larvae, Organic Fertilizer", "제품 및 솔루션: SRF, 복합 파이프, BSF 유충, 유기질 비료"],
+            "Produk dari pengolahan sampah: SRF (Solid Recovered Fuel), pipa dan manhole komposit plastik, larva BSF, dan pupuk organik. Hubungi kami untuk kerja sama.": ["Products from waste processing: SRF (Solid Recovered Fuel), plastic composite pipes and manholes, BSF larvae, and organic fertilizer. Contact us to partner.", "폐기물 처리에서 나오는 제품: SRF(고형 회수 연료), 플라스틱 복합 파이프와 맨홀, BSF 유충, 유기질 비료. 협력을 원하시면 문의해 주세요."],
+            "Profil PT Green Eco Teknologi: perusahaan teknologi pengolahan sampah terpadu di Cilegon dengan paten teknologi, mesin buatan sendiri, dan proyek revitalisasi TPSA Bagendung.": ["Profile of PT Green Eco Teknologi: an integrated waste processing technology company in Cilegon with patented technology, in-house machines, and the Bagendung landfill revitalization project.", "PT Green Eco Teknologi 소개: 칠레곤의 통합 폐기물 처리 기술 기업으로, 특허 기술, 자체 제작 장비, 바겐둥 최종처리장 재개발 프로젝트를 보유하고 있습니다."],
+            "Produk & Solusi": ["Products & Solutions", "제품 및 솔루션"],
+            "Menghadirkan nilai dari limbah melalui inovasi teknologi dan pemanfaatan material berkelanjutan.": ["Creating value from waste through technology innovation and sustainable use of materials.", "기술 혁신과 지속 가능한 소재 활용으로 폐기물에서 가치를 만들어 냅니다."],
+            "Tanya Produk Ini": ["Ask About This Product", "이 제품 문의"],
+            "SRF (Solid Recovered Fuel)": ["SRF (Solid Recovered Fuel)", "SRF(고형 회수 연료)"],
+            "Bahan baku": ["Raw material", "원료"],
+            "Proses": ["Process", "공정"],
+            "Manfaat": ["Benefits", "효과"],
+            "Material": ["Material", "소재"],
+            "Kegunaan": ["Use", "용도"],
+            "Budidaya": ["Cultivation", "사육"],
+            "Sampah organik": ["Organic waste", "유기성 폐기물"],
+            "Hasil dan manfaat": ["Results and benefits", "결과 및 효과"],
+            "Sampah rumah tangga Kota Cilegon yang dapat dibakar, setelah dipisahkan dari sampah organik dan plastik yang bisa didaur ulang.": ["Combustible household waste from Cilegon City, after being separated from organic waste and recyclable plastic.", "유기성 폐기물과 재활용 가능한 플라스틱을 분리한 뒤 남은 칠레곤 시 가정 가연성 폐기물."],
+            "Digiling sampai ukuran seragam kurang dari 100 mm, dipilah tahap kedua untuk membuang sisa bahan organik dan kadar air, lalu dikeringkan sampai kadar air sesuai spesifikasi.": ["Ground to a uniform size of under 100 mm, sorted a second time to remove remaining organic matter and moisture, then dried until the moisture content meets specification.", "100mm 미만의 균일한 크기로 분쇄하고, 2차 선별로 잔여 유기물과 수분을 제거한 뒤, 규격에 맞는 수분 함량까지 건조합니다."],
+            "Pengganti batu bara sebagai bahan bakar alternatif untuk pabrik semen dan co-firing di PLTU Suralaya. Pengeringan menurunkan kadar air dan menaikkan nilai kalor.": ["A coal substitute used as an alternative fuel for cement plants and for co-firing at the Suralaya power plant (PLTU). Drying lowers moisture content and raises calorific value.", "시멘트 공장의 대체 연료이자 수랄라야 발전소(PLTU) 혼소용으로 쓰이는 석탄 대체재입니다. 건조로 수분이 줄고 발열량이 높아집니다."],
+            "Plastik bekas yang masih bisa didaur ulang, dikumpulkan dan dipilah dari sampah rumah tangga.": ["Used plastic that can still be recycled, collected and sorted from household waste.", "가정 폐기물에서 수거·선별한 재활용 가능한 폐플라스틱."],
+            "Plastik dikumpulkan di ban berjalan, dipilah oleh tenaga kerja, lalu diolah menjadi pipa dan manhole komposit.": ["Plastic is placed on a conveyor, sorted by workers, then processed into composite pipes and manholes.", "플라스틱을 컨베이어 벨트에 올려 작업자가 선별한 뒤, 복합 파이프와 맨홀로 가공합니다."],
+            "Pipa saluran air limbah dan manhole untuk infrastruktur.": ["Wastewater drainage pipes and manholes for infrastructure.", "인프라용 하수관과 맨홀."],
+            "Black Soldier Fly (BSF) dibudidayakan dengan memanfaatkan sampah organik sebagai pakan larva.": ["Black Soldier Fly (BSF) is cultivated using organic waste as larva feed.", "유기성 폐기물을 유충 먹이로 활용해 아메리카동애등에(BSF)를 사육합니다."],
+            "Sisa makanan dan sayuran diolah sampai ukuran sesuai, diberi bioaktivator EM (Effective Microorganisms), lalu kadar airnya diatur agar cocok untuk pakan larva.": ["Food and vegetable scraps are processed to a suitable size, treated with EM (Effective Microorganisms) bio-activator, and the moisture is adjusted to suit larva feed.", "음식물과 채소 잔재를 알맞은 크기로 처리하고 EM(유용 미생물) 활성제를 넣은 뒤, 유충 먹이에 맞게 수분을 조절합니다."],
+            "Larva menjadi bahan baku pakan ikan dan unggas, sesuai standar keamanan dan mutu pakan. Residu budidaya (frass) dimanfaatkan menjadi pupuk organik.": ["Larvae become raw material for fish and poultry feed, in line with feed safety and quality standards. The cultivation residue (frass) is used as organic fertilizer.", "유충은 사료 안전·품질 기준에 따라 어류 및 가금류 사료 원료가 됩니다. 사육 후 잔여물(프라스)은 유기질 비료로 활용합니다."],
+            "Frass, yaitu residu budidaya larva BSF.": ["Frass, the residue from BSF larva cultivation.", "BSF 유충 사육 후 잔여물인 프라스(frass)."],
+            "Frass dimatangkan dan dikeringkan.": ["Frass is matured and dried.", "프라스를 숙성·건조합니다."],
+            "Dipasok ke petani sebagai pupuk organik yang memanfaatkan kembali sampah organik.": ["Supplied to farmers as organic fertilizer that puts organic waste back to use.", "유기성 폐기물을 재활용한 유기질 비료로 농가에 공급합니다."],
+            "Tertarik dengan Produk Kami?": ["Interested in Our Products?", "당사 제품에 관심이 있으신가요?"],
+            "Hubungi tim kami untuk mendapatkan informasi lebih lanjut mengenai produk dan peluang kerja sama.": ["Contact our team for more information about our products and partnership opportunities.", "제품 및 협력 기회에 대한 자세한 정보는 당사 팀에 문의해 주세요."],
+            "Profil Perusahaan": ["Company Profile", "회사 소개"],
+            "PT Green Eco Teknologi adalah perusahaan teknologi pengolahan sampah terpadu yang berkantor di Desa Bagendung, Kota Cilegon, Banten. Kami mengolah sampah menjadi SRF, pipa dan manhole komposit plastik, larva BSF, dan pupuk organik, serta merancang dan memproduksi sendiri mesin penghancur dan penyortir.": ["PT Green Eco Teknologi is an integrated waste processing technology company based in Bagendung Village, Cilegon City, Banten. We turn waste into SRF, plastic composite pipes and manholes, BSF larvae, and organic fertilizer, and we design and manufacture our own crushing and sorting machines.", "PT Green Eco Teknologi는 반텐주 칠레곤 시 바겐둥 마을에 위치한 통합 폐기물 처리 기술 기업입니다. 폐기물을 SRF, 플라스틱 복합 파이프와 맨홀, BSF 유충, 유기질 비료로 전환하며, 파쇄기와 선별기를 직접 설계·제작합니다."],
+            "Bidang Usaha": ["Business Scope", "사업 분야"],
+            "Pengolahan sampah terpadu, konsultasi dan implementasi teknologi SRF/BBJP, serta peralatan penghancur dan penyortir.": ["Integrated waste processing, SRF/BBJP technology consulting and implementation, and crushing and sorting equipment.", "통합 폐기물 처리, SRF/BBJP 기술 컨설팅 및 구축, 파쇄·선별 장비."],
+            "Status dan Legalitas": ["Status and Legal Standing", "법인 형태 및 적법성"],
+            "Berstatus Penanaman Modal Asing (PMA). Nomor Induk Berusaha (NIB) terbit 8 Februari 2025.": ["Registered as a Foreign Investment company (PMA). Business Identification Number (NIB) issued on 8 February 2025.", "외국인투자기업(PMA)으로 등록되어 있습니다. 사업자등록번호(NIB)는 2025년 2월 8일에 발급되었습니다."],
+            "Kompetensi Teknologi": ["Technology Competence", "기술 역량"],
+            "Enam paten teknologi penghancur dan pemilah, serta tiga proyek riset nasional pemerintah pusat Korea Selatan yang berhasil diselesaikan.": ["Six patents for crushing and sorting technology, and three national research projects of the South Korean central government completed successfully.", "파쇄·선별 기술 특허 6건과 한국 중앙정부 국가 연구 프로젝트 3건 수행 완료."],
+            "Pengalaman Proyek": ["Project Experience", "프로젝트 경험"],
+            "Revitalisasi TPSA Bagendung, Kota Cilegon, bersama Pemerintah Kota Cilegon. Mesin penghancur dan penyortir kami telah diuji langsung di lapangan di Cilegon.": ["Revitalization of the Bagendung landfill (TPSA) in Cilegon City, together with the Cilegon City Government. Our crushing and sorting machines have been tested on site in Cilegon.", "칠레곤 시 정부와 함께하는 바겐둥 최종처리장(TPSA) 재개발. 당사의 파쇄기와 선별기는 칠레곤 현장에서 직접 시험했습니다."],
+            "Jalur konveyor dan peralatan pemilahan di dalam fasilitas": ["Conveyor line and sorting equipment inside the facility", "시설 내부의 컨베이어 라인과 선별 장비"],
+            "Gudang penyimpanan produk SRF": ["SRF product storage warehouse", "SRF 제품 보관 창고"],
+            "Paten dan kekayaan intelektual": ["Patents and intellectual property", "특허 및 지식재산"],
+            "Dokumen legalitas perusahaan serta paten dan kekayaan intelektual teknologi.": ["Company legal documents, plus technology patents and intellectual property.", "회사 법적 서류 및 기술 특허·지식재산."],
+            "Nomor": ["No.", "번호"],
+            "Buka PDF": ["Open PDF", "PDF 열기"],
+          });
+
+          Object.assign(TR, {
+            "Alat dan Mesin Pengolah Sampah": ["Waste Processing Equipment and Machinery", "폐기물 처리 장비 및 기계"],
+            "Peralatan pengolahan sampah di TPSA Bagendung serta mesin penghancur dan penyortir sampah desain sendiri yang sudah diuji di lapangan di Cilegon.": ["Waste processing equipment at the Bagendung landfill (TPSA), plus in-house designed waste crushing and sorting machines tested in the field in Cilegon.", "바겐둥 최종처리장(TPSA)의 폐기물 처리 장비와, 칠레곤 현장에서 검증된 자체 설계 폐기물 파쇄·선별 장비."],
+            "Teknologi Tungsten Carbide dan Pisau Modular": ["Tungsten Carbide and Modular Blade Technology", "텅스텐 카바이드 및 모듈형 블레이드 기술"],
+            "Green Eco Teknologi": ["Green Eco Teknologi", "Green Eco Teknologi"],
+            "Pelapisan tungsten carbide WC-Co dan desain pisau modular untuk crusher dan wheel loader: ketahanan aus hingga 15x dibanding pelat baja biasa.": ["WC-Co tungsten carbide coating and modular blade design for crushers and wheel loaders: up to 15x the wear resistance of ordinary steel plate.", "크러셔와 휠 로더용 WC-Co 텅스텐 카바이드 코팅 및 모듈형 블레이드 설계: 일반 강판 대비 최대 15배의 내마모성."],
+            "Aplikasi Industri Peralatan Penghancur": ["Industrial Applications of Crushing Equipment", "파쇄 장비의 산업 적용"],
+            "Peralatan penghancur dan penyortir untuk daur ulang plastik, vinil, kayu, dan material lain, termasuk memisahkan plastik dari tanah di lahan TPA.": ["Crushing and sorting equipment for recycling plastic, vinyl, wood, and other materials, including separating plastic from soil at landfill sites.", "플라스틱, 비닐, 목재 등 각종 소재의 재활용을 위한 파쇄·선별 장비로, 매립지에서 플라스틱과 흙을 분리하는 작업도 포함합니다."],
+            "Dokumen legalitas perusahaan dan paten teknologi penghancur dan pemilah PT Green Eco Teknologi, termasuk paten yang terdaftar di Korea Selatan.": ["Legal documents of PT Green Eco Teknologi and its crushing and sorting technology patents, including patents registered in South Korea.", "PT Green Eco Teknologi의 법적 서류와 파쇄·선별 기술 특허(한국에 등록된 특허 포함)."],
+            "Kontak dan Minta Penawaran": ["Contact and Request a Quote", "문의 및 견적 요청"],
+            "Hubungi PT Green Eco Teknologi untuk kebutuhan pengolahan sampah dan peralatan penghancur. WhatsApp, telepon, email, dan alamat kantor di Bagendung, Cilegon.": ["Contact PT Green Eco Teknologi for waste processing and crushing equipment needs. WhatsApp, phone, email, and office address in Bagendung, Cilegon.", "폐기물 처리 및 파쇄 장비 문의는 PT Green Eco Teknologi로 연락해 주세요. WhatsApp, 전화, 이메일, 칠레곤 바겐둥 사무실 주소."],
+            "Fasilitas pengolahan dengan tumpukan produk SRF": ["Processing facility with piles of SRF product", "SRF 제품이 쌓여 있는 처리 시설"],
+            "dari berita: tiga orang memegang dokumen kerja sama Pemkot Cilegon dengan PT Green Eco Teknologi": ["From the news: three people holding the cooperation document between the Cilegon City Government and PT Green Eco Teknologi", "기사 사진: 세 사람이 칠레곤 시 정부와 PT Green Eco Teknologi의 협력 문서를 들고 있음"],
+            "Foto dari berita: tiga orang memegang dokumen kerja sama Pemkot Cilegon dengan PT Green Eco Teknologi": ["Photo from the news: three people holding the cooperation document between the Cilegon City Government and PT Green Eco Teknologi", "기사 사진: 세 사람이 칠레곤 시 정부와 PT Green Eco Teknologi의 협력 문서를 들고 있음"],
+            "Foto dari berita: pertemuan di ruang kerja, beberapa orang duduk berbincang": ["Photo from the news: a meeting in an office, several people seated and talking", "기사 사진: 사무실에서 여러 사람이 앉아 대화하는 회의 모습"],
+            "Halaman Tidak Ditemukan": ["Page Not Found", "페이지를 찾을 수 없습니다"],
+            "Alamat yang Anda buka tidak tersedia atau sudah dipindahkan. Silakan kembali ke beranda atau lihat produk kami.": ["The address you opened is unavailable or has been moved. Please return to the home page or view our products.", "열어 보신 주소를 사용할 수 없거나 이동되었습니다. 홈으로 돌아가거나 제품을 확인해 주세요."],
+            "Kembali ke Beranda": ["Back to Home", "홈으로 돌아가기"],
+            "Halaman tidak ditemukan.": ["Page not found.", "페이지를 찾을 수 없습니다."],
+          });
+
+          Object.assign(TR, {
+            "Kota Lebih Bersih, Dimulai dari Mesin Kami": ["A Cleaner City, Starting from Our Machines", "더 깨끗한 도시, 당사의 기계에서 시작됩니다"],
+            "Kami merancang, memperbaiki, dan menyediakan suku cadang mesin, termasuk Pisau Crusher dan Cutter Shredder, untuk membantu kota mengolah sampahnya.": ["We design, repair, and supply machine spare parts, including Crusher Blades and Shredder Cutters, to help cities process their waste.", "크러셔 블레이드와 슈레더 커터를 포함한 기계 설계·수리·부품 공급으로 도시의 폐기물 처리를 돕습니다."],
+            "Lihat Teknologi Pisau": ["View Blade Technology", "블레이드 기술 보기"],
+            "PT Green Eco Teknologi | Desain Mesin, Perbaikan, dan Suku Cadang Crusher & Shredder": ["PT Green Eco Teknologi | Machine Design, Repair, and Crusher & Shredder Spare Parts", "PT Green Eco Teknologi | 기계 설계, 수리 및 크러셔·슈레더 부품"],
+            "Desain Mesin, Perbaikan, dan Suku Cadang Crusher & Shredder": ["Machine Design, Repair, and Crusher & Shredder Spare Parts", "기계 설계, 수리 및 크러셔·슈레더 부품"],
+            "Desain mesin, perbaikan, serta suku cadang dan komponen habis pakai. Penggantian dan pasokan Pisau Crusher dan Cutter Shredder. Konsultasi terbuka, Cilegon.": ["Machine design, repair, and spare parts and consumable components. Replacement and supply of Crusher Blades and Shredder Cutters. Consultations welcome, Cilegon.", "기계 설계, 수리, 예비 부품 및 소모품. 크러셔 블레이드와 슈레더 커터 교체·공급. 상담 환영, 칠레곤."],
+            "Desain mesin, perbaikan, serta suku cadang dan komponen habis pakai: Pisau Crusher dan Cutter Shredder.": ["Machine design, repair, and spare parts and consumable components: Crusher Blades and Shredder Cutters.", "기계 설계, 수리, 예비 부품 및 소모품: 크러셔 블레이드와 슈레더 커터."],
+            "PT Green Eco Teknologi bergerak di bidang desain mesin, perbaikan, serta penyediaan suku cadang dan komponen habis pakai. Kami juga melayani penggantian dan pasokan pisau mesin penggiling (crusher) serta cutter mesin pencacah (shredder), dan menyambut dengan baik setiap pertanyaan dan konsultasi. Berkantor di Desa Bagendung, Kota Cilegon, Banten, kami juga mengembangkan teknologi pengolahan sampah terpadu.": ["PT Green Eco Teknologi specializes in machine design, repair, and the supply of spare parts and consumable components. We also provide replacement and supply of Crusher Blades and Shredder Cutters, and warmly welcome every question and consultation. Based in Bagendung Village, Cilegon City, Banten, we also develop integrated waste processing technology.", "PT Green Eco Teknologi는 기계 설계, 수리, 예비 부품 및 소모품 공급을 전문으로 합니다. 크러셔 블레이드와 슈레더 커터의 교체·공급도 제공하며, 모든 문의와 상담을 환영합니다. 반텐주 칠레곤 시 바겐둥 마을에 위치하며 통합 폐기물 처리 기술도 개발하고 있습니다."],
+            "Desain mesin, perbaikan, suku cadang dan komponen habis pakai, Pisau Crusher dan Cutter Shredder, serta pengolahan sampah terpadu.": ["Machine design, repair, spare parts and consumable components, Crusher Blades and Shredder Cutters, plus integrated waste processing.", "기계 설계, 수리, 예비 부품 및 소모품, 크러셔 블레이드와 슈레더 커터, 통합 폐기물 처리."],
+          });
+
+          Object.assign(TR, {
+            "Nilai Tambah dari Pengolahan Sampah": ["Added Value from Waste Processing", "폐기물 처리의 부가가치"],
+            "Mesin kami mengolah sampah menjadi produk bernilai guna.": ["Our machines turn waste into useful products.", "당사 장비는 폐기물을 유용한 제품으로 전환합니다."],
+            "Produk bernilai tambah dari pengolahan sampah dengan mesin rancangan kami.": ["Value-added products from waste processing with machines we design.", "당사가 설계한 장비로 폐기물을 처리해 만든 부가가치 제품."],
+            "Mesin rancangan sendiri, suku cadang, dan komponen habis pakai: Pisau Crusher dan Cutter Shredder.": ["In-house designed machines, spare parts, and consumable components: Crusher Blades and Shredder Cutters.", "자체 설계 장비, 예비 부품 및 소모품: 크러셔 블레이드와 슈레더 커터."],
+            "Butuh Pisau Crusher atau Cutter Shredder?": ["Need Crusher Blades or Shredder Cutters?", "크러셔 블레이드나 슈레더 커터가 필요하신가요?"],
+            "Kami melayani penggantian dan pasokan Pisau Crusher dan Cutter Shredder, serta perbaikan dan suku cadang mesin.": ["We provide replacement and supply of Crusher Blades and Shredder Cutters, plus machine repair and spare parts.", "크러셔 블레이드와 슈레더 커터의 교체·공급, 그리고 기계 수리 및 예비 부품을 제공합니다."],
+            "PT Green Eco Teknologi bergerak di bidang desain mesin, perbaikan, serta penyediaan suku cadang dan komponen habis pakai. Kami juga melayani penggantian dan pasokan pisau mesin penggiling (crusher) serta cutter mesin pencacah (shredder), dan menyambut dengan baik setiap pertanyaan dan konsultasi. Berkantor di Desa Bagendung, Kota Cilegon, Banten, kami juga mengembangkan teknologi pengolahan sampah terpadu. Produk yang dihasilkan mesin kami dari pengolahan sampah menjadi nilai tambah bagi layanan utama tersebut.": ["PT Green Eco Teknologi specializes in machine design, repair, and the supply of spare parts and consumable components. We also provide replacement and supply of Crusher Blades and Shredder Cutters, and warmly welcome every question and consultation. Based in Bagendung Village, Cilegon City, Banten, we also develop integrated waste processing technology. The products our machines make from waste processing add value to these core services.", "PT Green Eco Teknologi는 기계 설계, 수리, 예비 부품 및 소모품 공급을 전문으로 합니다. 크러셔 블레이드와 슈레더 커터의 교체·공급도 제공하며, 모든 문의와 상담을 환영합니다. 반텐주 칠레곤 시 바겐둥 마을에 위치하며 통합 폐기물 처리 기술도 개발하고 있습니다. 당사 장비가 폐기물 처리로 만들어 내는 제품은 이러한 핵심 서비스의 부가가치가 됩니다."],
           });
 
           function normHeads() {
